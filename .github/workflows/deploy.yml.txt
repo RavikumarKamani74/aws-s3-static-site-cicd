@@ -1,0 +1,26 @@
+name: Deploy Static Website to S3
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  id-token: write   # Required for OIDC
+  contents: read    # Required to checkout code
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials from OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::358238714507:role/GitHubOIDC-S3DeployRole
+          aws-region: ap-south-1
+
+      - name: Deploy to S3
+        run: aws s3 sync . s3://ravikumar-s3-static-website/ --delete
