@@ -17,6 +17,13 @@ This repository contains a **secure, production-grade CI/CD pipeline** for deplo
 
 ---
 
+## 🌐 Live Demo
+
+The static site is deployed and available at:
+
+👉 [https://dq6ta8ipffudm.cloudfront.net](https://dq6ta8ipffudm.cloudfront.net)
+
+
 ## 📁 Folder Structure
 
 aws-s3-static-site-cicd/
