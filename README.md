@@ -69,7 +69,7 @@ This IAM Role is used by GitHub via OIDC.
     }
   }
 }
-
+**IAM Policy (Minimal Permissions)**
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -91,5 +91,5 @@ This IAM Role is used by GitHub via OIDC.
   ]
 }
 
-Live Demo:
-https://dq6ta8ipffudm.cloudfront.net
+**Live Demo:**
+[https://dq6ta8ipffudm.cloudfront.net](url)
