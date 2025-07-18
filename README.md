@@ -1,48 +1,75 @@
 # 🚀 AWS S3 Static Website CI/CD with GitHub Actions and CloudFront
 
-This repository contains a fully automated CI/CD pipeline for deploying a static website to **Amazon S3**, served securely via **Amazon CloudFront**, with no long-term AWS credentials — thanks to **OIDC-based GitHub Actions integration**.
+This repository contains a **secure, production-grade CI/CD pipeline** for deploying a static website to **Amazon S3**, delivered via **Amazon CloudFront** with HTTPS and automatic cache invalidation. Authentication is done using **OIDC-based IAM Roles** — so **no access keys are stored or exposed**.
 
 ![Deploy to S3](https://github.com/RavikumarKamani74/aws-s3-static-site-cicd/actions/workflows/deploy.yml/badge.svg)
 
 ---
 
-## 🔧 Features
+## 🔧 Key Features
 
-- ✅ CI/CD using GitHub Actions
-- ✅ OIDC-based authentication (no stored AWS keys)
-- ✅ Auto-deployment to S3 on every `main` push
-- ✅ CloudFront cache invalidation for instant content update
-- ✅ Secure, scalable, and production-grade setup
+- ✅ **CI/CD via GitHub Actions** – triggered on `main` branch pushes
+- ✅ **OIDC-based authentication** – no AWS credentials stored
+- ✅ **S3 static hosting** – deploys static HTML/CSS/JS
+- ✅ **CloudFront CDN** – secure, global content delivery
+- ✅ **Automatic cache invalidation** – no manual step after update
+- ✅ **Least-privilege IAM role setup** – follows AWS security best practices
 
 ---
 
 ## 📁 Folder Structure
+
+aws-s3-static-site-cicd/
+├── .github/workflows/
+│ └── deploy.yml # GitHub Actions workflow
+├── index.html # Static website (landing page)
+└── README.md
 
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **Amazon S3** – Static site hosting  
-- **Amazon CloudFront** – CDN & HTTPS  
-- **IAM OIDC Role** – Secure GitHub to AWS access  
-- **GitHub Actions** – Automation  
-- **AWS CLI** – Deployer tool
+| Component         | Description                                 |
+|------------------|---------------------------------------------|
+| **Amazon S3**     | Hosts static HTML site                     |
+| **Amazon CloudFront** | Distributes via CDN with HTTPS         |
+| **GitHub Actions**| CI/CD workflow automation                  |
+| **IAM OIDC Role** | Secure GitHub → AWS access (no secrets)   |
+| **AWS CLI**       | Used by GitHub Actions for deployment      |
 
 ---
 
-## 🔄 CI/CD Pipeline Overview
+## 🔄 CI/CD Pipeline Workflow
 
-1. Push to `main` branch
-2. GitHub Actions assumes an OIDC IAM Role
-3. Files are synced to the S3 bucket: `ravikumar-s3-static-website`
-4. CloudFront distribution (`dq6ta8ipffudm.cloudfront.net`) is invalidated to update content globally
+1. **Push** to `main` triggers the GitHub Actions pipeline.
+2. GitHub uses **OIDC** to securely assume an **IAM role** in your AWS account.
+3. **Website files** are synced to the **S3 bucket**:  
+   `ravikumar-s3-static-website`
+4. The linked **CloudFront distribution** (`dq6ta8ipffudm.cloudfront.net`) is **invalidated**, so users see updates immediately.
 
 ---
 
-## 🔐 IAM Policy (Minimal Example)
+## 🔐 IAM Role & Permissions
+
+This IAM Role is used by GitHub via OIDC.
+
+### ✅ Trust Policy
 
 ```json
+{
+  "Effect": "Allow",
+  "Principal": {
+    "Federated": "arn:aws:iam::358238714507:oidc-provider/token.actions.githubusercontent.com"
+  },
+  "Action": "sts:AssumeRoleWithWebIdentity",
+  "Condition": {
+    "StringLike": {
+      "token.actions.githubusercontent.com:sub": "repo:RavikumarKamani74/aws-s3-static-site-cicd:*"
+    }
+  }
+}
+
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -63,3 +90,6 @@ This repository contains a fully automated CI/CD pipeline for deploying a static
     }
   ]
 }
+
+Live Demo:
+https://dq6ta8ipffudm.cloudfront.net
