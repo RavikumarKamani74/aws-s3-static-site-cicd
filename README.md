@@ -91,11 +91,6 @@ IAM Policy (Minimal Permissions)
   ]
 }
 
-## 🌐 Live Demo
-
-The static site is deployed and available at:
-
-👉 [https://dq6ta8ipffudm.cloudfront.net](https://dq6ta8ipffudm.cloudfront.net)
 
 
 
