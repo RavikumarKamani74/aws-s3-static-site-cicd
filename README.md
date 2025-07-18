@@ -2,7 +2,7 @@
 
 This repository contains a **secure, production-grade CI/CD pipeline** for deploying a static website to **Amazon S3**, delivered via **Amazon CloudFront** with HTTPS and automatic cache invalidation. Authentication is done using **OIDC-based IAM Roles** — so **no access keys are stored or exposed**.
 
-![Deploy to S3](https://github.com/RavikumarKamani74/aws-s3-static-site-cicd/actions/workflows/deploy.yml/badge.svg)
+![Deploy to S3](https://github.com/RavikumarKamani74/aws-s3-static-site-cicd/actions/workflows/deploy.yml/badge.)
 
 ---
 
@@ -69,7 +69,7 @@ This IAM Role is used by GitHub via OIDC.
     }
   }
 }
-**IAM Policy (Minimal Permissions)**
+IAM Policy (Minimal Permissions)
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -92,4 +92,4 @@ This IAM Role is used by GitHub via OIDC.
 }
 
 **Live Demo:**
-[https://dq6ta8ipffudm.cloudfront.net](url)
+[[https://dq6ta8ipffudm.cloudfront.net](url)
