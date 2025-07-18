@@ -91,5 +91,8 @@ IAM Policy (Minimal Permissions)
   ]
 }
 
-**Live Demo:**
-[[https://dq6ta8ipffudm.cloudfront.net](url)
+## 🌐 Live Demo
+
+Access the deployed site here:  
+👉 [https://dq6ta8ipffudm.cloudfront.net](https://dq6ta8ipffudm.cloudfront.net)
+
